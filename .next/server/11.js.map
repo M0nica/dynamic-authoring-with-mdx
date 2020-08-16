@@ -1,0 +1,1 @@
+{"version":3,"file":"11.js","sources":["webpack:///./components/SpeakerNotes.jsx"],"sourcesContent":["import React from 'react'\n\nexport default function SpeakerNotes({ children }) {\n  return children\n}\n"],"mappings":";;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAEA;AAAA;AAAA;AACA;AACA;;;;A","sourceRoot":""}
