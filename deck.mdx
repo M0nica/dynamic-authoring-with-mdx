@@ -1,0 +1,196 @@
+import myTheme from "./theme";
+export const theme = myTheme;
+import { notes } from "mdx-deck";
+
+import tweetEmbed from "./public/tweet-embed.png";
+import codepenEmbed from "./public/codepen-embed.png";
+import MDtoHTML from "./public/MDXtoHTML.png";
+import TOCDiff from "./public/toc-diff.png";
+import TOCVisual from "./public/table-of-contents-visual.png";
+import Callout from "./Callout.jsx";
+
+# Migrating Blog to MDX 📝
+
+Monica Powell &bull; MDX Conf 2020
+
+---
+
+# Why I migrated to MDX
+
+- FOMO Driven Development
+- to create engaging and interactive content!
+
+---
+
+# What is Remark?
+
+A collection of Markdown parser plugins that check, lint, generate and compiles Markdown.
+
+https://remark.js.org/
+
+---
+
+# Transformer Remark Plugins
+
+In Gatsby, Remark Transformer plugins are used to transform
+Markdown on a site into HTML.
+
+<img style={{ maxWidth: "50%", textAlign: "center" }} src={MDtoHTML} />
+
+---
+
+# Remark plugins can be used to:
+
+- autolink headers with anchor tags
+- process responsive images
+- add syntax highlight
+- embed content
+- and more!
+
+---
+
+# Remark plugins can be used to:
+
+<img style={{ maxWidth: "50%", textAlign: "center" }} src={codepenEmbed} />
+
+---
+
+# Remark plugins can be used to:
+
+<img style={{ maxWidth: "50%", textAlign: "center" }} src={tweetEmbed} />
+
+---
+
+# Goodbye gatsby-transformer-remark, Hello gatsby-plugin-mdx 👋🏾
+
+- Gatsby-plugin-mdx is the official integration for using MDX with Gatsby
+
+- Can be used in combination with Remark plugins.
+
+<Notes> Considered a regular Gatsby plugin vs. Remark plugin </Notes>
+
+---
+
+# Cannot Query Field
+
+`error Cannot query field "body" on type "Mdx". Did you mean "rawBody"? graphql/template-strings`
+
+I ran into an error accessing some of the fields that should be available for mdx nodes like body,timeToRead and excerpt.
+
+---
+
+# Debugging Conflicting Gatsby Plugins
+
+1. Commented out all of the plugins in gatsbyRemarkPlugins
+2. Confirmed that all of the data that should be available to query from mdx was available without Remark plugins.
+3. Re-added each plugin one-by-one to identify the culprit
+
+---
+
+# Resolving Conflicting Gatsby Plugins
+
+- There was a conflict with gatsby-plugin-mdx and the plugin, gatsby-plugin-my-social-cards, used to generate Open Graph images for all of my posts.
+
+- Fix: replacing gatsby-plugin-my-social-cards with gatsby-remark-twitter-cards
+
+---
+
+# What have I done with it?
+
+---
+
+# Added Table of Contents Component
+
+<img style={{ maxWidth: "55%", textAlign: "center" }} src={TOCVisual} />
+
+---
+
+# Added Table of Contents Component
+
+<img style={{ maxWidth: "80%", textAlign: "center" }} src={TOCDiff} />
+
+---
+
+# Added Callout Banners
+
+<Callout>Here's some important information for you to know!</Callout>
+<Callout variant="danger">Oops, there was an error</Callout>
+<Callout variant="garden">
+  That's all for now! 🥕 I am continuing to update this post, so check back
+  later!
+</Callout>
+<Callout variant="book">
+  "Here's a great quote from something I read recently.
+</Callout>
+
+---
+
+# Added Callout Banners
+
+```
+<Callout>...</Callout>
+<Callout variant="danger">...</Callout>
+<Callout variant="garden">...</Callout>
+<Callout variant="book">...</Callout>
+```
+
+---
+
+# What have I done with it?
+
+Upgraded the code snippets on my site’s blog post to be powered by React a.k.a MDX!
+
+I wanted to be able to easily add additional functionality to code snippets on my site like click to copy functionality
+
+I was using `gatsby-remark-prismjs` and ran into some issue since currently additional support for PrismJS plugin environment variables is [in development](https://github.com/gatsbyjs/gatsby/issues/20642).
+
+I decided to switch to `prism-react-renderer` in order to tap into the more robust functionality that’s available with React/MDX.
+
+---
+
+# What did migrating look like:
+
+- different syntax
+  The line highlighting syntax I was using from `gatsby-remark-prismjs` involved adding in-line comments like
+  `// highlight-start` and `// highlight-end`. In order to translate the highlighting over to `prism-react-renderer` I needed to update to use their syntax which looks like
+
+````
+
+```jsx {2-6}
+```
+
+which highlights based on line number.
+
+Prism-react-renderer is a lot more flexible then gatsby-remark-prismjs
+
+> I was wondering how certain websites are able to display language and copy to clipboard feature as seen in the photo below.
+
+> A custom code block for MDX and some CSS: https://github.com/gatsbyjs/gatsby/blob/master/www/src/components/code-block/index.js > https://github.com/gatsbyjs/gatsby/blob/master/www/src/utils/styles/global.js
+
+Display language is also possible with gatsby-remark-prismjs https://www.lekoarts.de/en/blog/language-tabs-for-gatsbys-code-blocks
+
+adding-line-numbers-and-code-highlighting-to-mdx-code-blocks
+
+https://www.lekoarts.de/en/blog/adding-line-numbers-and-code-highlighting-to-mdx-code-blocks
+
+——
+
+    - Added callouts with different variants
+    - Table of contents — reduced amount of code that needed to be written to load table of contents
+
+[image:65DEA490-8194-4688-BCAD-CCF4F70CBDB5-75650-0001FBA5C041DCCC/toc-diff.png]
+
+- what issues did I run into it with Gatsby? - conficting plugins
+- Migrated from “gatsby-remark-prismjs” to “prism-react-renderer”: “^1.1.1” (much fancier code snippets) 👨‍🍳 - https://github.com/M0nica/monica-site-playground/compare/improveCodeBlocks
+  [image:3B3BE6B0-1B59-45ED-AFBD-93321A20DC77-75650-0001FB2ED8820415/Screen_Shot_2020-07-24_at_11.30.27_PM.png][image:5528dbcb-fd05-487e-953b-3363b990a363-75650-0001fb2ed9318c60/screen_shot_2020-07-24_at_11.30.31_pm.png]
+
+[file:F5F1DD06-53F8-4737-8E89-2CCF805CB5F0-75650-0001FBA5BFC7F365/2020-07-25-upgrading-code-snippets-migrating-to-prism-react-renderer.md]
+
+Things I want to explore in MDX:
+A production-focused playground for live editing React code. 👀
+https://formidable.com/open-source/react-live/
+
+---
+
+# Thank you 👋🏾
+````
