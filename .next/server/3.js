@@ -467,8 +467,8 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
-const eggplant = '#2a2135';
-const white = '#fbf4ff';
+const eggplant = "#2a2135";
+const white = "#fbf4ff";
 const GlobalStyle = styled_components__WEBPACK_IMPORTED_MODULE_3__["createGlobalStyle"]`
   :root {
     --text: #2a2135;
@@ -748,7 +748,7 @@ function SlidePage({
     }
   };
 
-  Object(_hooks_useEventListener__WEBPACK_IMPORTED_MODULE_6__["default"])('keydown', navigate);
+  Object(_hooks_useEventListener__WEBPACK_IMPORTED_MODULE_6__["default"])("keydown", navigate);
 
   const swipeLeft = () => {
     navigate({
@@ -770,13 +770,13 @@ function SlidePage({
       // Check for <hr> element to separate slides
       const childType = child && child.props && (child.props.mdxType || []);
 
-      if (childType && childType.includes('hr')) {
+      if (childType && childType.includes("hr")) {
         generatorCount += 1;
         return;
       } // Check if it's a SpeakerNotes component
 
 
-      if (childType && childType.includes('SpeakerNotes')) {
+      if (childType && childType.includes("SpeakerNotes")) {
         if (!Array.isArray(generatedNotes[generatorCount])) {
           generatedNotes[generatorCount] = [];
         }
@@ -795,13 +795,13 @@ function SlidePage({
       // Check for <hr> element to separate slides
       const childType = child && child.props && (child.props.mdxType || []);
 
-      if (childType && childType.includes('hr')) {
+      if (childType && childType.includes("hr")) {
         generatorCount += 1;
         return;
       } // Check if it's a SpeakerNotes component
 
 
-      if (childType && !childType.includes('SpeakerNotes')) {
+      if (childType && !childType.includes("SpeakerNotes")) {
         // Add slide content to current generated slide
         if (!Array.isArray(generatedSlides[generatorCount])) {
           generatedSlides[generatorCount] = [];
@@ -866,7 +866,7 @@ function SlidePage({
   }, __jsx("div", {
     id: "slide",
     style: {
-      width: '100%'
+      width: "100%"
     },
     __self: this,
     __source: {

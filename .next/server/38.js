@@ -1,10 +1,10 @@
-exports.ids = [32];
+exports.ids = [38];
 exports.modules = {
 
-/***/ "./public/table-of-contents-visual.png":
-/*!*********************************************!*\
-  !*** ./public/table-of-contents-visual.png ***!
-  \*********************************************/
+/***/ "./screenshots/next-mdx-deck-presentation.png":
+/*!****************************************************!*\
+  !*** ./screenshots/next-mdx-deck-presentation.png ***!
+  \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -13,4 +13,4 @@ throw new Error("Module parse failed: Unexpected character '�' (1:0)\nYou may 
 /***/ })
 
 };;
-//# sourceMappingURL=32.js.map
+//# sourceMappingURL=38.js.map

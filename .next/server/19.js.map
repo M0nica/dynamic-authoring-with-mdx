@@ -1,1 +1,1 @@
-{"version":3,"file":"19.js","sources":[],"mappings":";;;;;;;;;;;;;;A","sourceRoot":""}
+{"version":3,"file":"19.js","sources":["webpack:///./next.config.js"],"sourcesContent":["const withMDX = require('@next/mdx')({\n  extension: /\\.(md|mdx)$/,\n})\nmodule.exports = withMDX({\n  // Pick up MDX files in the /pages/ directory\n  pageExtensions: ['js', 'jsx', 'md', 'mdx'],\n})\n"],"mappings":";;;;;;;;;;AAAA;AACA;AADA;AACA;AAEA;AACA;AACA;AAFA;;;;A","sourceRoot":""}

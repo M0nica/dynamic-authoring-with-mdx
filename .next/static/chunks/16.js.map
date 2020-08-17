@@ -1,1 +1,0 @@
-{"version":3,"file":"static/chunks/16.js","sources":["webpack:///./constants/modes.js"],"sourcesContent":["export const MODES = {\n  SLIDESHOW: 'slideshow',\n  SPEAKER: 'speaker',\n}\n\nexport default MODES\n"],"mappings":";;;;;;;;;;AAAA;AAAA;AAAA;AACA;AACA;AAFA;AAKA;;;;A","sourceRoot":""}

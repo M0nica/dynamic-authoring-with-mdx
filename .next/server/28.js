@@ -1,10 +1,10 @@
 exports.ids = [28];
 exports.modules = {
 
-/***/ "./public/codepen-embed.png":
-/*!**********************************!*\
-  !*** ./public/codepen-embed.png ***!
-  \**********************************/
+/***/ "./public/MDXtoHTML.png":
+/*!******************************!*\
+  !*** ./public/MDXtoHTML.png ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 

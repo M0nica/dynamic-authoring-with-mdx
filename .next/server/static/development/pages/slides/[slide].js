@@ -137,17 +137,17 @@ var map = {
 	"./CONTRIBUTING.md": [
 		"./CONTRIBUTING.md",
 		9,
-		21
+		22
 	],
 	"./LICENSE.md": [
 		"./LICENSE.md",
 		9,
-		22
+		23
 	],
 	"./README.md": [
 		"./README.md",
 		9,
-		23
+		24
 	],
 	"./components/Callout": [
 		"./components/Callout.jsx",
@@ -197,60 +197,70 @@ var map = {
 		9,
 		6
 	],
+	"./components/ReactDiff": [
+		"./components/ReactDiff.jsx",
+		9,
+		10
+	],
+	"./components/ReactDiff.jsx": [
+		"./components/ReactDiff.jsx",
+		9,
+		10
+	],
 	"./components/Slide": [
 		"./components/Slide.jsx",
 		9,
-		10
+		11
 	],
 	"./components/Slide.jsx": [
 		"./components/Slide.jsx",
 		9,
-		10
+		11
 	],
 	"./components/SpeakerNotes": [
 		"./components/SpeakerNotes.jsx",
 		9,
-		11
+		12
 	],
 	"./components/SpeakerNotes.jsx": [
 		"./components/SpeakerNotes.jsx",
 		9,
-		11
+		12
 	],
 	"./components/ThemeProvider": [
 		"./components/ThemeProvider.jsx",
 		9,
-		12
+		13
 	],
 	"./components/ThemeProvider.jsx": [
 		"./components/ThemeProvider.jsx",
 		9,
-		12
+		13
 	],
 	"./components/callout.module.css": [
 		"./components/callout.module.css?8fb4",
 		7,
-		20
+		21
 	],
 	"./constants/modes": [
 		"./constants/modes.js",
 		9,
-		13
+		14
 	],
 	"./constants/modes.js": [
 		"./constants/modes.js",
 		9,
-		13
+		14
 	],
 	"./context/CurrentSlideContext": [
 		"./context/CurrentSlideContext.jsx",
 		9,
-		14
+		15
 	],
 	"./context/CurrentSlideContext.jsx": [
 		"./context/CurrentSlideContext.jsx",
 		9,
-		14
+		15
 	],
 	"./context/ModeContext": [
 		"./context/ModeContext.jsx",
@@ -273,12 +283,12 @@ var map = {
 	"./hooks/useEventListener": [
 		"./hooks/useEventListener.js",
 		9,
-		15
+		16
 	],
 	"./hooks/useEventListener.js": [
 		"./hooks/useEventListener.js",
 		9,
-		15
+		16
 	],
 	"./hooks/useStorage": [
 		"./hooks/useStorage.js",
@@ -293,12 +303,12 @@ var map = {
 	"./layouts/AboutPage": [
 		"./layouts/AboutPage.jsx",
 		9,
-		16
+		17
 	],
 	"./layouts/AboutPage.jsx": [
 		"./layouts/AboutPage.jsx",
 		9,
-		16
+		17
 	],
 	"./layouts/SlidePage": [
 		"./layouts/SlidePage.jsx",
@@ -313,32 +323,32 @@ var map = {
 	"./layouts/TransitionPage": [
 		"./layouts/TransitionPage.jsx",
 		9,
-		17
+		18
 	],
 	"./layouts/TransitionPage.jsx": [
 		"./layouts/TransitionPage.jsx",
 		9,
-		17
+		18
 	],
 	"./next.config": [
 		"./next.config.js",
 		7,
-		18
+		19
 	],
 	"./next.config.js": [
 		"./next.config.js",
 		7,
-		18
+		19
 	],
 	"./package": [
 		"./package.json",
 		3,
-		19
+		20
 	],
 	"./package.json": [
 		"./package.json",
 		3,
-		19
+		20
 	],
 	"./pages": [
 		"./pages/index.jsx",
@@ -391,52 +401,57 @@ var map = {
 	"./public/MDXtoHTML.png": [
 		"./public/MDXtoHTML.png",
 		7,
-		27
+		28
+	],
+	"./public/animonica.png": [
+		"./public/animonica.png",
+		7,
+		29
 	],
 	"./public/codepen-embed.png": [
 		"./public/codepen-embed.png",
 		7,
-		28
+		30
 	],
 	"./public/favicon.ico": [
 		"./public/favicon.ico",
 		7,
-		29
+		31
 	],
 	"./public/table-of-contents-visual.png": [
 		"./public/table-of-contents-visual.png",
 		7,
-		30
+		32
 	],
 	"./public/toc-diff.png": [
 		"./public/toc-diff.png",
 		7,
-		31
+		33
 	],
 	"./public/tweet-embed.png": [
 		"./public/tweet-embed.png",
 		7,
-		32
+		34
 	],
 	"./public/zeit.svg": [
 		"./public/zeit.svg",
 		7,
-		33
+		35
 	],
 	"./screenshots/next-mdx-deck-example.gif": [
 		"./screenshots/next-mdx-deck-example.gif",
 		7,
-		34
+		36
 	],
 	"./screenshots/next-mdx-deck-main.png": [
 		"./screenshots/next-mdx-deck-main.png",
 		7,
-		35
+		37
 	],
 	"./screenshots/next-mdx-deck-presentation.png": [
 		"./screenshots/next-mdx-deck-presentation.png",
 		7,
-		36
+		38
 	],
 	"./site.config": [
 		"./site.config.js",
@@ -449,22 +464,22 @@ var map = {
 	"./slides/1.mdx": [
 		"./slides/1.mdx",
 		9,
-		24
+		25
 	],
 	"./slides/2.mdx": [
 		"./slides/2.mdx",
 		9,
-		25
+		26
 	],
 	"./slides/3.mdx": [
 		"./slides/3.mdx",
 		9,
-		26
+		27
 	],
 	"./yarn.lock": [
 		"./yarn.lock",
 		7,
-		37
+		39
 	]
 };
 function webpackAsyncContext(req) {
@@ -510,6 +525,8 @@ var map = {
 	"./components/MDXProvider.jsx": "./components/MDXProvider.jsx",
 	"./components/PresentationMode": "./components/PresentationMode.jsx",
 	"./components/PresentationMode.jsx": "./components/PresentationMode.jsx",
+	"./components/ReactDiff": "./components/ReactDiff.jsx",
+	"./components/ReactDiff.jsx": "./components/ReactDiff.jsx",
 	"./components/Slide": "./components/Slide.jsx",
 	"./components/Slide.jsx": "./components/Slide.jsx",
 	"./components/SpeakerNotes": "./components/SpeakerNotes.jsx",
@@ -550,6 +567,7 @@ var map = {
 	"./pages/slides/[slide]": "./pages/slides/[slide].js",
 	"./pages/slides/[slide].js": "./pages/slides/[slide].js",
 	"./public/MDXtoHTML.png": "./public/MDXtoHTML.png",
+	"./public/animonica.png": "./public/animonica.png",
 	"./public/codepen-embed.png": "./public/codepen-embed.png",
 	"./public/favicon.ico": "./public/favicon.ico",
 	"./public/table-of-contents-visual.png": "./public/table-of-contents-visual.png",
@@ -2930,6 +2948,17 @@ module.exports = require("react");
 
 /***/ }),
 
+/***/ "react-diff-viewer":
+/*!************************************!*\
+  !*** external "react-diff-viewer" ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-diff-viewer");
+
+/***/ }),
+
 /***/ "react-swipeable":
 /*!**********************************!*\
   !*** external "react-swipeable" ***!
@@ -2952,14 +2981,14 @@ module.exports = require("react-syntax-highlighter");
 
 /***/ }),
 
-/***/ "react-syntax-highlighter/dist/cjs/styles/prism/okaidia":
-/*!*************************************************************************!*\
-  !*** external "react-syntax-highlighter/dist/cjs/styles/prism/okaidia" ***!
-  \*************************************************************************/
+/***/ "react-syntax-highlighter/dist/cjs/styles/prism/duotone-sea":
+/*!*****************************************************************************!*\
+  !*** external "react-syntax-highlighter/dist/cjs/styles/prism/duotone-sea" ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("react-syntax-highlighter/dist/cjs/styles/prism/okaidia");
+module.exports = require("react-syntax-highlighter/dist/cjs/styles/prism/duotone-sea");
 
 /***/ }),
 

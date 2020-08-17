@@ -126,16 +126,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mdx_js_react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_mdx_js_react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_syntax_highlighter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-syntax-highlighter */ "react-syntax-highlighter");
 /* harmony import */ var react_syntax_highlighter__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_syntax_highlighter__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_syntax_highlighter_dist_cjs_styles_prism_okaidia__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-syntax-highlighter/dist/cjs/styles/prism/okaidia */ "react-syntax-highlighter/dist/cjs/styles/prism/okaidia");
-/* harmony import */ var react_syntax_highlighter_dist_cjs_styles_prism_okaidia__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_syntax_highlighter_dist_cjs_styles_prism_okaidia__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_syntax_highlighter_dist_cjs_styles_prism_duotone_sea__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-syntax-highlighter/dist/cjs/styles/prism/duotone-sea */ "react-syntax-highlighter/dist/cjs/styles/prism/duotone-sea");
+/* harmony import */ var react_syntax_highlighter_dist_cjs_styles_prism_duotone_sea__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_syntax_highlighter_dist_cjs_styles_prism_duotone_sea__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _layouts_SlidePage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../layouts/SlidePage */ "./layouts/SlidePage.jsx");
 /* harmony import */ var _Cover__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Cover */ "./components/Cover.jsx");
 /* harmony import */ var _SpeakerNotes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./SpeakerNotes */ "./components/SpeakerNotes.jsx");
 /* harmony import */ var _Callout__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Callout */ "./components/Callout.jsx");
+/* harmony import */ var _ReactDiff__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ReactDiff */ "./components/ReactDiff.jsx");
 var _jsxFileName = "/Users/monica/Dev/migrating-to-mdx/components/MDXProvider.jsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 
 
 
@@ -150,25 +152,25 @@ const mdComponents = {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 11,
+      lineNumber: 12,
       columnNumber: 18
     }
   })),
   pre: props => props.children,
   code: props => {
     const {
-      className = ''
+      className = ""
     } = props;
-    const language = className.replace('language-', '');
+    const language = className.replace("language-", "");
     return __jsx(react_syntax_highlighter__WEBPACK_IMPORTED_MODULE_2__["Prism"], _extends({
       className: className,
       language: language,
-      style: react_syntax_highlighter_dist_cjs_styles_prism_okaidia__WEBPACK_IMPORTED_MODULE_3___default.a
+      style: react_syntax_highlighter_dist_cjs_styles_prism_duotone_sea__WEBPACK_IMPORTED_MODULE_3___default.a
     }, props, {
       __self: undefined,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 17,
+        lineNumber: 18,
         columnNumber: 7
       }
     }));
@@ -185,7 +187,7 @@ const mdComponents = {
   __self: undefined,
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 32,
+    lineNumber: 33,
     columnNumber: 3
   }
 }, children));
@@ -315,6 +317,69 @@ function PresentationMode({
 
 /***/ }),
 
+/***/ "./components/ReactDiff.jsx":
+/*!**********************************!*\
+  !*** ./components/ReactDiff.jsx ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Diff; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_diff_viewer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-diff-viewer */ "react-diff-viewer");
+/* harmony import */ var react_diff_viewer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_diff_viewer__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/Users/monica/Dev/migrating-to-mdx/components/ReactDiff.jsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+const oldCode = `
+const a = 10
+const b = 10
+const c = () => console.log('foo')
+
+if(a > 10) {
+  console.log('bar')
+}
+
+console.log('done')
+`;
+const newCode = `
+const a = 10
+const boo = 10
+
+if(a === 10) {
+  console.log('bar')
+}
+`;
+class Diff extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "render", () => {
+      return __jsx(react_diff_viewer__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        oldValue: oldCode,
+        newValue: newCode,
+        splitView: true,
+        __self: this,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 27,
+          columnNumber: 7
+        }
+      });
+    });
+  }
+
+}
+
+/***/ }),
+
 /***/ "./components/Slide.jsx":
 /*!******************************!*\
   !*** ./components/Slide.jsx ***!
@@ -396,7 +461,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 const theme = {
   colors: {
-    primary: '#0070f3'
+    primary: "#0070f3"
   }
 };
 const ThemeProvider = ({
@@ -737,8 +802,8 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
-const eggplant = '#2a2135';
-const white = '#fbf4ff';
+const eggplant = "#2a2135";
+const white = "#fbf4ff";
 const GlobalStyle = styled_components__WEBPACK_IMPORTED_MODULE_3__["createGlobalStyle"]`
   :root {
     --text: #2a2135;
@@ -1018,7 +1083,7 @@ function SlidePage({
     }
   };
 
-  Object(_hooks_useEventListener__WEBPACK_IMPORTED_MODULE_6__["default"])('keydown', navigate);
+  Object(_hooks_useEventListener__WEBPACK_IMPORTED_MODULE_6__["default"])("keydown", navigate);
 
   const swipeLeft = () => {
     navigate({
@@ -1040,13 +1105,13 @@ function SlidePage({
       // Check for <hr> element to separate slides
       const childType = child && child.props && (child.props.mdxType || []);
 
-      if (childType && childType.includes('hr')) {
+      if (childType && childType.includes("hr")) {
         generatorCount += 1;
         return;
       } // Check if it's a SpeakerNotes component
 
 
-      if (childType && childType.includes('SpeakerNotes')) {
+      if (childType && childType.includes("SpeakerNotes")) {
         if (!Array.isArray(generatedNotes[generatorCount])) {
           generatedNotes[generatorCount] = [];
         }
@@ -1065,13 +1130,13 @@ function SlidePage({
       // Check for <hr> element to separate slides
       const childType = child && child.props && (child.props.mdxType || []);
 
-      if (childType && childType.includes('hr')) {
+      if (childType && childType.includes("hr")) {
         generatorCount += 1;
         return;
       } // Check if it's a SpeakerNotes component
 
 
-      if (childType && !childType.includes('SpeakerNotes')) {
+      if (childType && !childType.includes("SpeakerNotes")) {
         // Add slide content to current generated slide
         if (!Array.isArray(generatedSlides[generatorCount])) {
           generatedSlides[generatorCount] = [];
@@ -1136,7 +1201,7 @@ function SlidePage({
   }, __jsx("div", {
     id: "slide",
     style: {
-      width: '100%'
+      width: "100%"
     },
     __self: this,
     __source: {
