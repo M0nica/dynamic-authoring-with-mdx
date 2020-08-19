@@ -2,7 +2,7 @@
 
 <Cover>
 
-# Migrating Gatsby Blog to MDX 📝
+# Migrating From Remark to MDX 📝
 
 Monica Powell &bull; MDX Conf 2020
 
@@ -28,16 +28,15 @@ I'm a software engineer who is passionate about making contributing to open-sour
 
 ---
 
-I was happy with my Gatsby site with Remark plugins, so...
-
 # Why did I migrated from Remark to MDX?
 
 - FOMO Driven Development
-- to create engaging and interactive content!
+- to be able to use React components to create more engaging and interactive content
 
 <SpeakerNotes>
-  Why not upgrade to MDX? I was hearing other developers talk about the
-  superpowers of MDX and wanted to check it out for myself. I was especially
+  I consider my personal site my personal playground and was intrigued by MDX
+  and thought why not upgrade to MDX? I was hearing other developers talk about
+  the superpowers of MDX and wanted to check it out for myself. I was especially
   interested in creating engaging and interactive content and had seen fun
   examples of content that resonated with me that used MDX.
 </SpeakerNotes>
@@ -53,6 +52,13 @@ I was happy with my Gatsby site with Remark plugins, so...
 
 <img style={{ maxWidth: "50%", textAlign: "center" }} src="/MDXtoHTML.png" />
 
+<SpeakerNotes>
+  My website was a Gatsby site that uses Remark plugins to transform Markdown
+  into HTML. A lot of this parsing functionality is setup within the
+  gatsby-config file. The config is also where other site configuration such as
+  metadata is constructed.
+</SpeakerNotes>
+
 ---
 
 # Remark plugins can be used to:
@@ -63,6 +69,12 @@ I was happy with my Gatsby site with Remark plugins, so...
 - embed content
 - and more!
 
+<SpeakerNotes>
+  I've used Remark plugins for things like adding anchor tags to each header
+  within an article, processing responsive images, adding syntax highlighting,
+  embedding content and more.
+</SpeakerNotes>
+
 ---
 
 # Remark plugins can be used to:
@@ -71,12 +83,21 @@ I was happy with my Gatsby site with Remark plugins, so...
   style={{ maxWidth: "50%", textAlign: "center" }}
   src="/codepen-embed.png"
 />
+<SpeakerNotes>
+  For example here within an article written in Markdown I used an embed plugin
+  to display a Codepen pen
+</SpeakerNotes>
 
 ---
 
 # Remark plugins can be used to:
 
 <img style={{ maxWidth: "40%", textAlign: "center" }} src="/tweet-embed.png" />
+
+<SpeakerNotes>
+  and here I used an embed plugin to display an embedded tweet within a Markdown
+  article
+</SpeakerNotes>
 
 ---
 
@@ -87,23 +108,26 @@ I was happy with my Gatsby site with Remark plugins, so...
 - Can be used in combination with Remark plugins.
 
 <SpeakerNotes>
-  {" "}
-  Considered a regular Gatsby plugin vs. Remark plugin{" "}
+  In order to switch over to MDX, I needed to get rid of
+  gatsby-transformer-remark and setup gatsby-plugin-mdx. Luckily, MDX also uses
+  Remark under the hood to parse its Abstract Syntax Tree and is compatible with
+  a lot of Remark plugins.
 </SpeakerNotes>
 
 ---
 
 # What did migrating look like
 
-```shell
-yarn add @mdx-js/mdx @mdx-js/react gatsby-plugin-mdx
-yarn remove gatsby-transformer-remark
-```
+- yarn add @mdx-js/mdx @mdx-js/react gatsby-plugin-mdx
+- yarn remove gatsby-transformer-remark
+- replace ~~gatsby-transformer-remark~~ with `gatsby-plugin-mdx` in config
 
-Updating `gatsby-config`:
+<SpeakerNotes>
+   Migrating to MDX largely looked like installing mdx, mdx-js/react,
+  gatsby-plugin-mdx and uninstalling gatsby-transformer-remark. and then removing lingering remnants of gatsby-transformer-remark within the
+  gatsby-config.
 
-- replace ~~gatsby-transformer-remark~~ with `gatsby-plugin-mdx`
-- replace ~~gatsby-plugin-my-social-cards~~ with `gatsby-remark-twitter-cards`
+</SpeakerNotes>
 
 ---
 
@@ -111,10 +135,26 @@ Updating `gatsby-config`:
 
 Updating queries and references to Markdown nodes to replace references to `allMarkdownRemark` to `allMdx`:
 
-- ~~`const posts = result.data.allMarkdownRemark.edges`~~ to
-  `const posts = result.data.allMDX.edges`
+```jsx {diff}
+-  const posts = result.data.allMarkdownRemark.edges
++  const posts = result.data.allMDX.edges
+```
 
-- ~~`node.internal.type ===`MarkdownRemark``~~ to `node.internal.type ===`Mdx``
+<br />
+
+```jsx {diff}
+- node.internal.type === `MarkdownRemark`
++ node.internal.type) === `Mdx`
+```
+
+<SpeakerNotes>
+  In addition to updating the gatsby-config, in order to complete the migration
+  I needed to update any code references to Markdown to MDX. Within Gatsby data
+  such as content is accessed through GraphQL and with the migration from
+  Markdown to MDX the name of the GraphQL nodes that needed to be accessed
+  changed. For the most part up until now migrating has just involved doing a
+  bit of installation and find and replaced.
+</SpeakerNotes>
 
 ---
 
@@ -128,8 +168,11 @@ Updating queries and references to Markdown nodes to replace references to `allM
 After installing `gatsby-plugin-mdx` and updating all references to Markdown to MDX...
 
 <SpeakerNotes>
-  I ran into an error accessing some of the fields that should be available for
-  mdx nodes like `body`, `timeToRead` and `excerpt`.
+  I thought I had covered all my bases finding and replacing Markdown and MDX,
+  however I ran into an error accessing some of the fields that should be
+  available for mdx nodes like `body`, `timeToRead` and `excerpt`. I wasn't sure
+  _why_ this node wasn't available as it's something that the gatsby-mdx plugin
+  is supposed to add to the site's GraphQL layer.
 </SpeakerNotes>
 
 ---
@@ -137,15 +180,26 @@ After installing `gatsby-plugin-mdx` and updating all references to Markdown to 
 # Debugging Conflicting Gatsby Plugins 🕵🏾‍♀️
 
 1. Commented out all of the plugins in gatsbyRemarkPlugins
-2. Confirmed that all of the data that should be available to query from mdx was available all gatsbyRemarkPlugins were (temporarily) removed
+2. Confirmed that all of the data that should be available in GraphQL to query from MDX was available all gatsbyRemarkPlugins were temporarily removed
 3. Re-added each plugin one-by-one to identify the culprit
-4. Identified conflict between `gatsby-plugin-mdx` and `gatsby-plugin-my-social-cards`.
+4. Identified conflict between `gatsby-plugin-mdx` and `gatsby-plugin-my-social-cards`
+
+<SpeakerNotes>
+  In order to debug this issue, I ended up opening the GraphQL Playground in
+  Gatsby to see what query fields were or were not available. I was then able to
+  confirm that the `body`, `timeToRead` etc. fields were not available. Next, I
+  commented out all of the remark plugins and then when I re-ran the queries in
+  the playground the data that formerly was not available was appearing. I then
+  worked my way through all of the installed plugins to identify the culprit by
+  determining when the MDX fields disappeared.This resulted in me identifying a
+  conflict between `gatsby-plugin-mdx` and `gatsby-plugin-my-social-cards`
+</SpeakerNotes>
 
 ---
 
 # Resolving Conflicting Gatsby Plugins
 
-- Plugins that transform the Abstract Syntax Tree (AST) can sometimes conflict with each other or behave in unexpected ways.
+- Plugins that transform the Abstract Syntax Tree (AST) can sometimes conflict with each other and behave in unexpected ways.
 - Sometimes re-ordering plugins in `gatsby-config` can resolve conflicts.
 
 <Callout>
@@ -155,9 +209,14 @@ After installing `gatsby-plugin-mdx` and updating all references to Markdown to 
 </Callout>
 
 <SpeakerNotes>
-  There was a conflict with `gatsby-plugin-mdx` and the plugin,
-  `gatsby-plugin-my-social-cards`, used to generate Open Graph images for all of
-  my posts.
+  Since there was a conflict with `gatsby-plugin-mdx` and the plugin, used to
+  generate Open Graph images for all of my posts, I decided to find an
+  alternative Open Graph plugin than to investigate the specific plugin conflict
+  further as it seemed like it would involve having to modify third party code
+  and I wanted a working solution as quickly as possible. Another alternative to
+  solving the other issue or switching a plugin is to try to re-order the
+  plugins. Some plugins will tell you what order they should be added in to
+  reduce conflicts.
 </SpeakerNotes>
 
 ---
@@ -167,6 +226,14 @@ After installing `gatsby-plugin-mdx` and updating all references to Markdown to 
 - ✨ Upgraded ✨ components for code snippets and table of contents
 - created additional Callout components to complement markdown quotes
 - Added dynamic slider
+
+<SpeakerNotes>
+  After the issue retrieving MDX data was resolved it was time to get started
+  with actually using MDX on my site! Some of the ways I've used MDX so far is
+  to upgrade code snippets to use more customizable JSX instead of markdown,
+  dynamic table of contents, added Callout components and added a dynamic slider
+  to a post.
+</SpeakerNotes>
 
 ---
 
@@ -193,7 +260,13 @@ class BlogPostTemplate extends React.Component {
 ```
 
 <SpeakerNotes>
-  But first we need to wrap the MDXProvider and MDXRenderer around blog posts
+  The first thing I needed to do before using MDX was wrapping the MDXProvider
+  around my blog post template since I wanted MDX to be available for all of my
+  articles. The MDXProvider allows you to pass all of your components in one
+  place. This provider wraps both my post content and the MDXRenderer. The
+  MDXRenderer is a React component from the MDX Gatsby integration that takes
+  compiled MDX content and renders it. It's required if your MDX content is
+  coming from a GraphQL page query or StaticQuery.
 </SpeakerNotes>
 
 ---
@@ -204,6 +277,25 @@ class BlogPostTemplate extends React.Component {
   style={{ maxWidth: "40%", textAlign: "center" }}
   src="/table-of-contents-visual.png"
 />
+
+<SpeakerNotes>
+  For my longer articles I like to add a table of contents so that readers can
+  view an overview of what to expect in a particular article.
+</SpeakerNotes>
+
+---
+
+# Before/After MDX
+
+## <img style={{ maxWidth: "80%", textAlign: "center" }} src="/toc-diff.png" />
+
+<SpeakerNotes>
+  I liked adding these so much that I was manually writing Markdown to render
+  table of contents within my articles. Here's a diff of what the Table of
+  Contents for individual posts looked like before and after MDX. After
+  implementing MDX, adding table of contents is just a one line reference to a
+  component.
+</SpeakerNotes>
 
 ---
 
@@ -227,9 +319,10 @@ function TableOfContents({ headings }) {
 ```
 
 <SpeakerNotes>
-  Create a Table of Contents JSX component to map through all of the headers and
-  display them as list items with links. There's an autolink plugin to ensure
-  the anchor link exists.
+  In order to reduce the amount of TOC that lives in an individual blog post I
+  created a Table of Contents JSX component to map through all of the headers
+  and display them as list items with links. There's an autolink plugin to
+  ensure the anchor link exists.
 </SpeakerNotes>
 
 ---
@@ -258,15 +351,16 @@ class BlogPostTemplate extends React.Component {
 ```
 
 <SpeakerNotes>
-  We need to import the new Table of Contents component into the MDX provider,
-  if we want this component to be accessible to all blog posts
+  I then imported the new Table of Contents component into the MDX provider in
+  my article template, so that this component is accessible to any blog posts. I
+  also updated the post query to pass in the tableOfContents field for that post
+  as a prop that can then be passed into the TableOfContents components. The
+  TableOfContents field is a default available with the Gatsby MDX
+  configuration. The TableOfContents field also allows you to pass in a depth to
+  pull in subheadings. For my use case I only cared about the first layer but
+  the TOC component can be set up to recursively render all of the headings and
+  subheadings.
 </SpeakerNotes>{" "}
-
----
-
-# Before/After: Table of Contents Component
-
-<img style={{ maxWidth: "80%", textAlign: "center" }} src="/toc-diff.png" />
 
 ---
 
@@ -281,6 +375,15 @@ class BlogPostTemplate extends React.Component {
 <Callout variant="book">
   "Here's a great quote from something I read recently.
 </Callout>
+
+Inspired by http://prince.dev/ 💜
+
+<SpeakerNotes>
+  Something cool I saw around the web was folks using Callout banners to make
+  certain content stand out. I had a similar style already for a markdown quote
+  on my blog and was eager to extend the different styles of callouts I could
+  include in content so I created a Callout component.
+</SpeakerNotes>
 
 ---
 
@@ -300,6 +403,27 @@ to
   <Callout variant="book">...</Callout>
 </>
 ```
+
+<SpeakerNotes>
+  So now in addition to being able to add quotes within blog posts, I can also
+  add different variations of the banner by using the Callout component.
+</SpeakerNotes>
+
+---
+
+# Callout Banners
+
+<Callout>Here's some important information for you to know!</Callout>
+<Callout variant="danger">Oops, there was an error</Callout>
+<Callout variant="garden">
+  That's all for now! 🥕 I am continuing to update this post, so check back
+  later!
+</Callout>
+<Callout variant="book">
+  "Here's a great quote from something I read recently.
+</Callout>
+
+<SpeakerNotes> Show the visual callouts again </SpeakerNotes>
 
 ---
 
@@ -327,6 +451,12 @@ const variantStyles = {
 };
 ```
 
+<SpeakerNotes>
+  For each variation there are different styles for borderLeft and
+  backgroundColor that are based off of the variant that is passed in. In the
+  component it also adds CSS classnames based on the variant prop.
+</SpeakerNotes>
+
 ---
 
 ```jsx
@@ -338,46 +468,103 @@ export default function Callout({ variant = "info", children }) {
     ...
   };
   return (
-    <aside
-      css={{
-       /* a bunch of default CSS*/
-        ...variantStyles[variant],
-      }}
-      className={classes}
-    >
+    <aside css={{ /* a bunch of default CSS*/ ...variantStyles[variant],
+      }} className={classes} >
       {children}
     </aside>
   );
 }
 ```
 
----
-
-# Upgraded Cod Snippets
-
-I wanted to be able to easily add additional functionality to code snippets on my site like click to copy functionality
-
-I was using `gatsby-remark-prismjs` and ran into some issue since currently additional support for PrismJS plugin environment variables is [in development](https://github.com/gatsbyjs/gatsby/issues/20642).
-
-I decided to switch to `prism-react-renderer` in order to tap into the more robust functionality that’s available with React/MDX.
-
-Prism-react-renderer is a lot more flexible than gatsby-remark-prismjs
-
-> I was wondering how certain websites are able to display language and copy to clipboard feature as seen in the photo below.
-
-- Migrated from “gatsby-remark-prismjs” to “prism-react-renderer”: “^1.1.1” (much fancier code snippets) 👨‍🍳 - https://github.com/M0nica/monica-site-playground/compare/improveCodeBlocks
-  [image:3B3BE6B0-1B59-45ED-AFBD-93321A20DC77-75650-0001FB2ED8820415/Screen_Shot_2020-07-24_at_11.30.27_PM.png][image:5528dbcb-fd05-487e-953b-3363b990a363-75650-0001fb2ed9318c60/screen_shot_2020-07-24_at_11.30.31_pm.png]
-
-[file:F5F1DD06-53F8-4737-8E89-2CCF805CB5F0-75650-0001FBA5BFC7F365/2020-07-25-upgrading-code-snippets-migrating-to-prism-react-renderer.md]
+<SpeakerNotes>
+  The Callout component also has a CSS Module file for the psuedoclasses to show
+  the emojis before each callout based on the CSS classname that was appended
+  from the variant prop.
+</SpeakerNotes>
 
 ---
 
-Things I want to explore in MDX:
-A production-focused playground for live editing React code. 👀
-https://formidable.com/open-source/react-live/
+# Upgraded Code Snippets
+
+- switched from `gatsby-remark-prismsjs` to `prism-react-renderer`
+- more robust functionality that’s available with React/MDX
+- some of the `prismjs` extendability was limited within `gatsby-remark-prismsjs` plugin, e.g., the ability the copy to clipboard functionality.
+
+<img
+  style={{ maxWidth: "50%", textAlign: "center", display: "inline" }}
+  src="/code_snippet_without_mdx.png"
+/>
+<img
+  style={{ maxWidth: "50%", textAlign: "center", display: "inline" }}
+  src="/code_snippet_with_mdx.png"
+/>
 
 ---
 
-# Thank you 👋🏾
+# Code
+
+```jsx
+import Highlight from "prism-react-renderer";
+import theme from "prism-react-renderer/themes/palenight";
+
+const Code = ({ codeString, language, metastring, ...props }) => {
+  return (
+    <Highlight code={codeString} language={language} theme={theme} {...props}>
+      {({ className, style, tokens, getLineProps, getTokenProps }) =>
+        // map through each token and render the line of code
+      }
+    </Highlight>
+  );
+};
+```
+
+---
+
+# Using Code component
+
+```jsx
+import TableOfContents from "../components/TableOfContents";
+import Callout from "../components/Callout";
+import { preToCodeBlock } from "mdx-utils";
+import Code from "./code";
+
+const components = { const components = {
+TableOfContents,
+Callout,
+pre: preProps => {
+const props = preToCodeBlock(preProps)
+  if (props) {
+  return <Code {...props} />
+  } else {
+  return <pre {...preProps} />
+  }
+},
+ } }
+```
+
+<SpeakerNotes>
+  In the components that are passed into the MDXProvider. preToCodeBlock allows
+  us to replace `<pre />` with out custom component and also retains any props
+  that were passed in the MDX. Sources: https://mdxjs.com/blog/custom-pragma,
+  https://www.christopherbiscardi.com/post/codeblocks-mdx-and-mdx-utils{" "}
+</SpeakerNotes>
+
+---
+
+# Updated Syntax
+
+The syntax for code snippets varied a bit between the two plugins so I manually searched through my code examples to make sure the syntax was updated to render properly with the updated plugin (i.e., if there were highlighted lines the right lines were still being highlighted)
+
+---
+
+# Thank you 👋🏾!
+
+I need to go explore the following in MDX...
+
+- A production-focused playground for live editing React code 👀
+  https://formidable.com/open-source/react-live/
+- Creating a dynamic countdown component
+- Adding more razzle dazzle ✨
 
 </SlidePage>
+````
