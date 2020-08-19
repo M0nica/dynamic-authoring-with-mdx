@@ -45,7 +45,7 @@ I'm a software engineer who is passionate about making contributing to open-sour
 
 # Transformer Remark
 
-- Remark is a collection of Markdown parser plugins that check, lint, generate and compiles Markdown.
+- Remark is a collection of Markdown parser plugins that check, lint, generate and compile Markdown.
 
 - In Gatsby, Remark Transformer plugins are used in the `gatsby-config` to transform
   Markdown on a site into HTML.
@@ -126,7 +126,7 @@ _Above embed powered by `gatsby-mdx-embed`_.
 
 - yarn add @mdx-js/mdx @mdx-js/react gatsby-plugin-mdx
 - yarn remove gatsby-transformer-remark
-- replace ~~gatsby-transformer-remark~~ with `gatsby-plugin-mdx` in config
+- replace gatsby-transformer-remark with `gatsby-plugin-mdx` in config
 
 <SpeakerNotes>
    Migrating to MDX largely looked like installing mdx, mdx-js/react,
@@ -149,8 +149,7 @@ Updating queries and references to Markdown nodes to replace references to `allM
 <br />
 
 ```jsx {diff}
-- node.internal.type === `MarkdownRemark`
-+ node.internal.type) === `Mdx`
+(-node.internal.type === `MarkdownRemark` + node.internal.type) === `Mdx`;
 ```
 
 <SpeakerNotes>
@@ -216,10 +215,9 @@ After installing `gatsby-plugin-mdx` and updating all references to Markdown to 
 
 <SpeakerNotes>
   Since there was a conflict with `gatsby-plugin-mdx` and the plugin, used to
-  generate Open Graph images for all of my posts, I decided to find an
-  alternative Open Graph plugin than to investigate the specific plugin conflict
-  further as it seemed like it would involve having to modify third party code
-  and I wanted a working solution as quickly as possible. Another alternative to
+  generate Open Graph images for all of my posts, I decided to find an further
+  as it seemed like it would involve having to modify third party code and I
+  wanted a working solution as quickly as possible. Another alternative to
   solving the other issue or switching a plugin is to try to re-order the
   plugins. Some plugins will tell you what order they should be added in to
   reduce conflicts.
@@ -271,11 +269,12 @@ class BlogPostTemplate extends React.Component {
 <SpeakerNotes>
   The first thing I needed to do before using MDX was wrapping the MDXProvider
   around my blog post template since I wanted MDX to be available for all of my
-  articles. The MDXProvider allows you to pass all of your components in one
-  place. This provider wraps both my post content and the MDXRenderer. The
-  MDXRenderer is a React component from the MDX Gatsby integration that takes
-  compiled MDX content and renders it. It's required if your MDX content is
-  coming from a GraphQL page query or StaticQuery.
+  articles. The MDXProvider allows you to pass the components you want to be
+  available to all of the pages that are within that context in one place. This
+  provider wraps both my post content and the MDXRenderer. The MDXRenderer is a
+  React component from the MDX Gatsby integration that takes compiled MDX
+  content and renders it. It's required if your MDX content is coming from a
+  GraphQL page query or StaticQuery.
 </SpeakerNotes>
 
 ---
@@ -333,7 +332,8 @@ function TableOfContents({ headings }) {
   In order to reduce the amount of TOC that lives in an individual blog post I
   created a Table of Contents JSX component to map through all of the headers
   and display them as list items with links. There's an autolink plugin to
-  ensure the anchor link exists.
+  ensure the anchor link exists. The headings are being passed in from the
+  TableOfContents data field which has a headings attribute.
 </SpeakerNotes>
 
 ---
@@ -556,16 +556,18 @@ import Callout from "../components/Callout";
 import { preToCodeBlock } from "mdx-utils";
 import Code from "./code";
 
-const components = { TableOfContents, Callout,
-  pre: preProps => {
-  const props = preToCodeBlock(preProps)
+const components = {
+  TableOfContents,
+  Callout,
+  pre: (preProps) => {
+    const props = preToCodeBlock(preProps);
     if (props) {
-    return <Code {...props} />
+      return <Code {...props} />;
     } else {
-    return <pre {...preProps} />
+      return <pre {...preProps} />;
     }
-},
- } }
+  },
+};
 ```
 
 <SpeakerNotes>
@@ -606,6 +608,8 @@ const components = { TableOfContents, Callout,
 * https://github.com/PaulieScanlon/gatsby-mdx-embed
 * https://github.com/frontarm/mdx-util
 * https://github.com/FormidableLabs/prism-react-renderer
+
+- https://github.com/whoisryosuke/next-mdx-deck
 
 ---
 
