@@ -3,3 +3,5 @@ node_modules
 
 # next.js build output
 .next
+
+yarn-error.log

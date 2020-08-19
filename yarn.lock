@@ -1112,6 +1112,11 @@
   resolved "https://registry.yarnpkg.com/@next/mdx/-/mdx-9.5.2.tgz#71d28fa3a43270a681a75eabaef8486811e378d0"
   integrity sha512-KJLi1cNrrX0q++e0VIWRDmwnMA2NdG5CKp09YZY1tDn+7wC6Xs4bEScoXIiFThfB4uXSrzrvHUEijDKCoMTabA==
 
+"@pauliescanlon/gatsby-mdx-embed@^0.0.27":
+  version "0.0.27"
+  resolved "https://registry.yarnpkg.com/@pauliescanlon/gatsby-mdx-embed/-/gatsby-mdx-embed-0.0.27.tgz#555a04cd182956c0420e67940c40bfc89e3fe16f"
+  integrity sha512-Yia521Y+0ZdFN+bksxdcQPR2JcoqIJTCL9u63X2E/nezTyyeiKfHVpbSuArJtXuogt7YlIMbLP7E6uSHIy1khQ==
+
 "@popmotion/easing@^1.0.1", "@popmotion/easing@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@popmotion/easing/-/easing-1.0.2.tgz#17d925c45b4bf44189e5a38038d149df42d8c0b4"

@@ -79,10 +79,10 @@ I'm a software engineer who is passionate about making contributing to open-sour
 
 # Remark plugins can be used to:
 
-<img
-  style={{ maxWidth: "50%", textAlign: "center" }}
-  src="/codepen-embed.png"
-/>
+`<CodePen codePenId="jObpJma" tabs={["css", "result"]} />`
+
+<CodePen codePenId="jObpJma" tabs={["css", "result"]} />
+
 <SpeakerNotes>
   For example here within an article written in Markdown I used an embed plugin
   to display a Codepen pen
@@ -92,8 +92,9 @@ I'm a software engineer who is passionate about making contributing to open-sour
 
 # Remark plugins can be used to:
 
-<img style={{ maxWidth: "40%", textAlign: "center" }} src="/tweet-embed.png" />
+`<Tweet tweetLink="waterproofheart/status/1201359059791822851" align="center" />`
 
+<Tweet tweetLink="waterproofheart/status/1201359059791822851" align="center" />
 <SpeakerNotes>
   and here I used an embed plugin to display an embedded tweet within a Markdown
   article
@@ -557,12 +558,24 @@ The syntax for code snippets varied a bit between the two plugins so I manually 
 
 ---
 
+# Resources
+
+- https://nickymeuleman.netlify.app/blog/table-of-contents#nested-heading-levels
+- https://prince.dev/callout
+- https://www.christopherbiscardi.com/post/codeblocks-mdx-and-mdx-utils
+
+* https://github.com/PaulieScanlon/gatsby-mdx-embed
+* https://github.com/frontarm/mdx-util
+* https://github.com/FormidableLabs/prism-react-renderer
+
+---
+
 # Thank you 👋🏾!
 
 I need to go explore the following in MDX...
 
-- A production-focused playground for live editing React code 👀
-  https://formidable.com/open-source/react-live/
+- creating examples that include React code that can be edited live 👀
+  with Formidable's `react-live`
 - Creating a dynamic countdown component
 - Adding more razzle dazzle ✨
 
