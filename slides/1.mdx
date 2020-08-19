@@ -556,16 +556,14 @@ import Callout from "../components/Callout";
 import { preToCodeBlock } from "mdx-utils";
 import Code from "./code";
 
-const components = { const components = {
-TableOfContents,
-Callout,
-pre: preProps => {
-const props = preToCodeBlock(preProps)
-  if (props) {
-  return <Code {...props} />
-  } else {
-  return <pre {...preProps} />
-  }
+const components = { TableOfContents, Callout,
+  pre: preProps => {
+  const props = preToCodeBlock(preProps)
+    if (props) {
+    return <Code {...props} />
+    } else {
+    return <pre {...preProps} />
+    }
 },
  } }
 ```

@@ -2,7 +2,7 @@ import React from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { MdxEmbedProvider } from "@pauliescanlon/gatsby-mdx-embed";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import duotoneSea from "react-syntax-highlighter/dist/cjs/styles/prism/duotone-sea";
+import duotoneSea from "react-syntax-highlighter/dist/cjs/styles/prism/tomorrow";
 import SlidePage from "../layouts/SlidePage";
 import Cover from "./Cover";
 import SpeakerNotes from "./SpeakerNotes";
