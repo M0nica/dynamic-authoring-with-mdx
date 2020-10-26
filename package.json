@@ -1,7 +1,7 @@
 {
-  "name": "migrating-to-mdx",
+  "name": "dynamic-authoring-with-mdx",
   "version": "0.1.0",
-  "description": "Presentation deck on migrating to mdx that uses MDX, React, and Next.JS",
+  "description": "A presentation on the superpowers of authoring content with MDX that uses MDX, React, and Next.JS",
   "private": true,
   "scripts": {
     "dev": "next dev",

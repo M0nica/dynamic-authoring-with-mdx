@@ -2,9 +2,9 @@
 
 <Cover>
 
-# Migrating to MDX 📝
+# Dynamic Authoring with MDX 📝
 
-Monica Powell &bull; MDX Conf 2020
+Monica Powell &bull; Apollo Day &bull; November 2020
 
 </Cover>
 
@@ -12,7 +12,7 @@ Monica Powell &bull; MDX Conf 2020
 
 # Hi, I'm Monica 👋🏾
 
-I'm a software engineer who is passionate about making contributing to open-source more approachable, creating technology to elevate people, and building community. I recently started using MDX and am looking forward to sharing more about my MDX migration...
+I'm a software engineer who is passionate about making contributing to open-source more approachable, creating technology to elevate people, and building community. I am looking forward to sharing how you can super-charge content creation with MDX.
 
 <img
   style={{ maxWidth: "20%", textAlign: "center", display: "inline" }}
@@ -28,10 +28,26 @@ I'm a software engineer who is passionate about making contributing to open-sour
 
 ---
 
-# Why did I migrated from Remark to MDX?
+# What is MDX?
 
-- FOMO Driven Development
-- to be able to use React components to create more engaging and interactive content
+Markdown + JSX
+
+---
+
+# What is MDX?
+
+- "JSX in Markdown for ambitious projects"
+- MDX can refer to either the syntax _or_ library
+- MDX (library) converts MDX syntax -> JSX
+- JSX is compiled by Babel/Webpack for browser
+
+---
+
+# Why MDX?
+
+- Great authoring experience for developers
+- allows React components to be imported
+- to create more engaging and interactive content with the ease of markdown
 
 <SpeakerNotes>
   I consider my personal site my personal playground and was intrigued by MDX
@@ -43,41 +59,17 @@ I'm a software engineer who is passionate about making contributing to open-sour
 
 ---
 
-# Transformer Remark
+# Example: Timer
 
-- Remark is a collection of Markdown parser plugins that check, lint, generate and compile Markdown.
+Add a timer or a countdown into a markdown file with the following:
 
-- In Gatsby, Remark Transformer plugins are used in the `gatsby-config` to transform
-  Markdown on a site into HTML.
+`<CountDown minutes="1" seconds="30" />`
 
-<img style={{ maxWidth: "50%", textAlign: "center" }} src="/MDXtoHTML.png" />
-
-<SpeakerNotes>
-  My website was a Gatsby site that uses Remark plugins to transform Markdown
-  into HTML. A lot of this parsing functionality is setup within the
-  gatsby-config file. The config is also where other site configuration such as
-  metadata is constructed.
-</SpeakerNotes>
+## <CountDown minutes="1" seconds="30" />
 
 ---
 
-# Remark plugins can be used to:
-
-- autolink headers with anchor tags
-- process responsive images
-- add syntax highlight
-- embed content
-- and more!
-
-<SpeakerNotes>
-  I've used Remark plugins for things like adding anchor tags to each header
-  within an article, processing responsive images, adding syntax highlighting,
-  embedding content and more.
-</SpeakerNotes>
-
----
-
-# Remark plugins can be used to:
+# Example: Embed
 
 `<CodePen codePenId="jObpJma" tabs={["css", "result"]} />`
 
@@ -88,139 +80,6 @@ _Above embed powered by `gatsby-mdx-embed`_.
 <SpeakerNotes>
   For example here within an article written in Markdown I used an embed plugin
   to display a Codepen pen
-</SpeakerNotes>
-
----
-
-# Remark plugins can be used to:
-
-`<Tweet tweetLink="waterproofheart/status/1201359059791822851" align="center" />`
-
-<Tweet tweetLink="waterproofheart/status/1201359059791822851" align="center" />
-
-_Above embed powered by `gatsby-mdx-embed`_.
-
-<SpeakerNotes>
-  and here I used an embed plugin to display an embedded tweet within a Markdown
-  article
-</SpeakerNotes>
-
----
-
-# Goodbye gatsby-transformer-remark, Hello gatsby-plugin-mdx 👋🏾
-
-- Gatsby-plugin-mdx is the official integration for using MDX with Gatsby
-
-- MDX uses Remark and is compatible with many Remark plugins.
-
-<SpeakerNotes>
-  In order to switch over to MDX, I needed to get rid of
-  gatsby-transformer-remark and setup gatsby-plugin-mdx. Luckily, MDX also uses
-  Remark under the hood to parse its Abstract Syntax Tree and is compatible with
-  a lot of Remark plugins.
-</SpeakerNotes>
-
----
-
-# Migration: Updating Dependencies
-
-- yarn add @mdx-js/mdx @mdx-js/react gatsby-plugin-mdx
-- yarn remove gatsby-transformer-remark
-- replace gatsby-transformer-remark with `gatsby-plugin-mdx` in config
-
-<SpeakerNotes>
-   Migrating to MDX largely looked like installing mdx, mdx-js/react,
-  gatsby-plugin-mdx and uninstalling gatsby-transformer-remark. and then removing lingering remnants of gatsby-transformer-remark within the
-  gatsby-config.
-
-</SpeakerNotes>
-
----
-
-# Migration: Removing Stale References
-
-Updating queries and references to Markdown nodes to replace references to `allMarkdownRemark` to `allMdx`:
-
-```jsx {diff}
--  const posts = result.data.allMarkdownRemark.edges
-+  const posts = result.data.allMDX.edges
-```
-
-<br />
-
-```jsx {diff}
-(-node.internal.type === `MarkdownRemark` + node.internal.type) === `Mdx`;
-```
-
-<SpeakerNotes>
-  In addition to updating the gatsby-config, in order to complete the migration
-  I needed to update any code references to Markdown to MDX. Within Gatsby data
-  such as content is accessed through GraphQL and with the migration from
-  Markdown to MDX the name of the GraphQL nodes that needed to be accessed
-  changed. For the most part up until now migrating has just involved doing a
-  bit of installation and find and replaced.
-</SpeakerNotes>
-
----
-
-# Migration: Cannot Query Field 🤯
-
-<Callout variant="danger">
-  error Cannot query field "body" on type "Mdx". Did you mean "rawBody"?
-  graphql/template-strings
-</Callout>
-
-After installing `gatsby-plugin-mdx` and updating all references to Markdown to MDX...
-
-<SpeakerNotes>
-  I thought I had covered all my bases finding and replacing Markdown and MDX,
-  however I ran into an error accessing some of the fields that should be
-  available for mdx nodes like `body`, `timeToRead` and `excerpt`. I wasn't sure
-  _why_ this node wasn't available as it's something that the gatsby-mdx plugin
-  is supposed to add to the site's GraphQL layer.
-</SpeakerNotes>
-
----
-
-# Migration: Debugging Unavailable MDX Data 🕵🏾‍♀️
-
-1. Commented out all of the plugins in gatsbyRemarkPlugins
-2. Confirmed that all of the data that should be available in GraphQL to query from MDX was available all gatsbyRemarkPlugins were temporarily removed
-3. Re-added each plugin one-by-one to identify the culprit
-4. Identified conflict between `gatsby-plugin-mdx` and `gatsby-plugin-my-social-cards`
-
-<SpeakerNotes>
-  In order to debug this issue, I ended up opening the GraphQL Playground in
-  Gatsby to see what query fields were or were not available. I was then able to
-  confirm that the `body`, `timeToRead` etc. fields were not available. Next, I
-  commented out all of the remark plugins and then when I re-ran the queries in
-  the playground the data that formerly was not available was appearing. I then
-  worked my way through all of the installed plugins to identify the culprit by
-  determining when the MDX fields disappeared.This resulted in me identifying a
-  conflict between `gatsby-plugin-mdx` and `gatsby-plugin-my-social-cards`
-</SpeakerNotes>
-
----
-
-# Migration: Resolving Conflicting Plugins
-
-- Gatsby plugins that transform the Abstract Syntax Tree (AST) can sometimes conflict with each other and behave in unexpected ways.
-- Sometimes re-ordering plugins in `gatsby-config` can resolve conflicts.
-
-<Callout>
-  {" "}
-  Solution: replace gatsby-plugin-my-social-cards with
-  gatsby-remark-twitter-cards
-</Callout>
-
-<SpeakerNotes>
-  Since there was a conflict with `gatsby-plugin-mdx` and the plugin, used to
-  generate Open Graph images for all of my posts, I decided to find an further
-  as it seemed like it would involve having to modify third party code and I
-  wanted a working solution as quickly as possible. Another alternative to
-  solving the other issue or switching a plugin is to try to re-order the
-  plugins. Some plugins will tell you what order they should be added in to
-  reduce conflicts.
 </SpeakerNotes>
 
 ---

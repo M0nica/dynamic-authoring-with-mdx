@@ -7,6 +7,7 @@ import SlidePage from "../layouts/SlidePage";
 import Cover from "./Cover";
 import SpeakerNotes from "./SpeakerNotes";
 import Callout from "./Callout";
+import { CountDown } from "./Countdown";
 
 const mdComponents = {
   h1: (props) => <h1 {...props} />,
@@ -24,6 +25,7 @@ const mdComponents = {
     );
   },
   Callout,
+  CountDown,
   Cover,
   SlidePage,
   SpeakerNotes,

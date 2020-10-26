@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: `@waterproofheart`,
-  title: `Migrating to MDX Deck`,
-  date: `monica.dev/migratingtomdx`,
+  title: `Dynamic Authoring with MDX`,
+  date: `monica.dev/dynamicauthoring`,
   author: {
     url: `https://twitter.com/waterproofheart`,
   },
