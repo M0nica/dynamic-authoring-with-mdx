@@ -59,6 +59,10 @@ Markdown + JSX
 
 ---
 
+# Using MDX with Storybook
+
+## https://storybook.js.org/docs/react/writing-docs/mdx
+
 # Example: Timer
 
 Add a timer or a countdown into a markdown file with the following:
@@ -98,6 +102,39 @@ _Above embed powered by `gatsby-mdx-embed`_.
   dynamic table of contents, added Callout components and added a dynamic slider
   to a post.
 </SpeakerNotes>
+
+---
+
+How to use MDX
+
+- wrap code in <MDXProvider/>
+
+```js
+// src/App.js
+import React from "react";
+import { MDXProvider } from "@mdx-js/react";
+import {
+  LoadingSpinner,
+  SignUp,
+  TableOfContents,
+  Callout,
+  Code,
+} from "./components";
+
+const components = {
+  LoadingSpinner,
+  Signup,
+  TableOfContents,
+  Callout,
+  pre: Code, // override markdown styling
+};
+
+export default (props) => (
+  <MDXProvider components={components}>
+    <main {...props} />
+  </MDXProvider>
+);
+```
 
 ---
 
