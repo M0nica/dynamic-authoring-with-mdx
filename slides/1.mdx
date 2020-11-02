@@ -12,7 +12,7 @@ Monica Powell &bull; Apollo Day &bull; November 2020
 
 # Hi, I'm Monica 👋🏾
 
-I'm a software engineer who is passionate about making contributing to open-source more approachable, creating technology to elevate people, and building community. I am looking forward to sharing how you can super-charge content creation with MDX.
+I'm a software engineer who is passionate about making contributing to open-source more approachable, creating technology to elevate people, and building community. I am excited to share how you can super-charge content creation with MDX.
 
 <img
   style={{ maxWidth: "20%", textAlign: "center", display: "inline" }}
@@ -28,58 +28,79 @@ I'm a software engineer who is passionate about making contributing to open-sour
 
 ---
 
-# What is MDX?
+## MDX is "JSX in Markdown for ambitious projects"
 
-Markdown + JSX
+<img style={{ maxWidth: "80%", textAlign: "center" }} src="/mdx-jsmdx.png" />
+
+<SpeakerNotes>
+
+First, you may be wonder what is MDX? At the simplest level it's a programming syntax that supports writing JSX in Markdown.
+
+MDX brands itself as "JSX in Markdown for ambitious projects".
+
+</SpeakerNotes>
 
 ---
 
-# What is MDX?
+# But, what is MDX?
 
-- "JSX in Markdown for ambitious projects"
 - MDX can refer to either the syntax _or_ library
-- MDX (library) converts MDX syntax -> JSX
+- The MDX _library_ converts MDX _syntax_ ➡ JSX
 - JSX is compiled by Babel/Webpack for browser
+
+<SpeakerNotes>
+  You can refer to MDX as the library that converts MDX syntax to JSX or as the
+  syntax that is written. MDX is converted into JSX which is ultimately compiled
+  for browser by tools like Babel or Webpack.
+</SpeakerNotes>
 
 ---
 
 # Why MDX?
 
-- Great authoring experience for developers
-- allows React components to be imported
-- to create more engaging and interactive content with the ease of markdown
+<Callout variant="plain">
+  strong authoring experience for technical contributors
+</Callout>
+<Callout variant="plain">
+  seamlessly import React components into MDX files
+</Callout>
+
+<Callout variant="plain">
+
+create more engaging, interactive content with the ease of markdown
+
+</Callout>
 
 <SpeakerNotes>
-  I consider my personal site my personal playground and was intrigued by MDX
-  and thought why not upgrade to MDX? I was hearing other developers talk about
-  the superpowers of MDX and wanted to check it out for myself. I was especially
-  interested in creating engaging and interactive content and had seen fun
+  I started using MDX after hearing other developers talk about the enhanced
+  functionality that MDX can add to websites. I was especially interested in
+  exploring MDX for creating engaging and interactive content after seeing fun
   examples of content that resonated with me that used MDX.
 </SpeakerNotes>
 
 ---
 
-# Using MDX with Storybook
+# MDX Example: <ArticleList/> in Article
 
-## https://storybook.js.org/docs/react/writing-docs/mdx
+- site programmatically passes data into `<Articlelist/>` from the result of a GraphQL query
+- article uses hard-coded data (R) within a `.mdx` file to render the below instance of the `<ArticleList/>` component (L):
 
-# Example: Timer
-
-Add a timer or a countdown into a markdown file with the following:
-
-`<CountDown minutes="1" seconds="30" />`
-
-## <CountDown minutes="1" seconds="30" />
+<a href="https://www.aboutmonica.com/blog/how-to-render-relevant-icons-based-on-content">
+  <img
+    style={{ maxWidth: "80%", textAlign: "center" }}
+    src="/mdx-in-blog-example.png"
+  />
+</a>
 
 ---
 
-# Example: Embed
+# MDX Example: Third-Party Embeds
 
 `<CodePen codePenId="jObpJma" tabs={["css", "result"]} />`
 
 <CodePen codePenId="jObpJma" tabs={["css", "result"]} />
 
-_Above embed powered by `gatsby-mdx-embed`_.
+_Above embed powered by `mdx-embed`_.
 
 <SpeakerNotes>
   For example here within an article written in Markdown I used an embed plugin
@@ -88,45 +109,18 @@ _Above embed powered by `gatsby-mdx-embed`_.
 
 ---
 
-# What have I done with MDX so far...
+# Using MDXProvider
 
-- ✨ Upgraded ✨ components for code snippets
-- ✨ Upgraded ✨ table of contents
-- created Callout components to complement markdown quotes
-- created a dynamic slider
-
-<SpeakerNotes>
-  After the issue retrieving MDX data was resolved it was time to get started
-  with actually using MDX on my site! Some of the ways I've used MDX so far is
-  to upgrade code snippets to use more customizable JSX instead of markdown,
-  dynamic table of contents, added Callout components and added a dynamic slider
-  to a post.
-</SpeakerNotes>
-
----
-
-How to use MDX
-
-- wrap code in <MDXProvider/>
+- centralized place to pass components that wraps layout pages
 
 ```js
-// src/App.js
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
-import {
-  LoadingSpinner,
-  SignUp,
-  TableOfContents,
-  Callout,
-  Code,
-} from "./components";
+import { SignUp, TableOfContents } from "./components";
 
 const components = {
-  LoadingSpinner,
   Signup,
   TableOfContents,
-  Callout,
-  pre: Code, // override markdown styling
 };
 
 export default (props) => (
@@ -136,41 +130,12 @@ export default (props) => (
 );
 ```
 
----
-
-# ArticleTemplate.jsx
-
-```jsx
-import { MDXProvider } from "@mdx-js/react";
-import { MDXRenderer } from "gatsby-plugin-mdx";
-
-const components = {
-  /* stash React components to be used in MDX blog posts here! */
-};
-
-class BlogPostTemplate extends React.Component {
-  render() {
-    const post = this.props.data.mdx;
-    if (!post) return null;
-
-    return (
-      <MDXProvider components={components}>
-        <MDXRenderer>{post.body}</MDXRenderer>
-      </MDXProvider>
-    );
-  }
-}
-```
-
 <SpeakerNotes>
   The first thing I needed to do before using MDX was wrapping the MDXProvider
   around my blog post template since I wanted MDX to be available for all of my
   articles. The MDXProvider allows you to pass the components you want to be
   available to all of the pages that are within that context in one place. This
-  provider wraps both my post content and the MDXRenderer. The MDXRenderer is a
-  React component from the MDX Gatsby integration that takes compiled MDX
-  content and renders it. It's required if your MDX content is coming from a
-  GraphQL page query or StaticQuery.
+  provider wraps both my post content.
 </SpeakerNotes>
 
 ---
@@ -252,23 +217,43 @@ class BlogPostTemplate extends React.Component {
 
     return (
       <MDXProvider components={components}>
-        <MDXRenderer>{post.body}</MDXRenderer>
+        <MDXRenderer tableOfContents={post.tableOfContents}>
+          {post.body}
+        </MDXRenderer>
       </MDXProvider>
     );
   }
 }
+
+export const pageQuery = graphql`
+  query BlogPostBySlug($slug: String!, $permalink: String!) {
+    mdx(fields: { slug: { eq: $slug } }) {
+      id
+      timeToRead
+      body
+      tableOfContents
+      frontmatter {
+        title
+        date(formatString: "MMMM DD, YYYY")
+      }
+    }
+  }
+`;
 ```
 
 <SpeakerNotes>
   I then imported the new Table of Contents component into the MDX provider in
-  my article template, so that this component is accessible to any blog posts. I
-  also updated the post query to pass in the tableOfContents field for that post
-  as a prop that can then be passed into the TableOfContents components. The
-  TableOfContents field is a default available with the Gatsby MDX
-  configuration. The TableOfContents field also allows you to pass in a depth to
-  pull in subheadings. For my use case I only cared about the first layer but
-  the TOC component can be set up to recursively render all of the headings and
-  subheadings.
+  my article template, so that this component is accessible to any blog posts.
+  In Gatby applications you also need to import an MDXRenderer which is a React
+  component from the MDX Gatsby integration that takes compiled MDX content and
+  renders it. It's required if your MDX content is coming from a GraphQL page
+  query or StaticQuery. I also updated the post query to pass in the
+  tableOfContents field for that post as a prop that can then be passed into the
+  TableOfContents components. The TableOfContents field is a default available
+  with the Gatsby MDX configuration. The TableOfContents field also allows you
+  to pass in a depth tot pull in subheadings. For my use case I only cared about
+  the first layer but the TOC component can be set up to recursively render all
+  of the headings and subheadings.
 </SpeakerNotes>{" "}
 
 ---
@@ -395,114 +380,32 @@ export default function Callout({ variant = "info", children }) {
 
 ---
 
-# Upgraded Code Snippets
+# Example: Timer
 
-- switched from `gatsby-remark-prismsjs` to `prism-react-renderer`
-- more robust functionality available with React/MDX
-- `prismjs` extendability limited within `gatsby-remark-prismsjs` plugin, e.g., the ability the copy to clipboard functionality.
+Add a timer or a countdown into a markdown file with the following:
 
-<img
-  style={{ maxWidth: "50%", textAlign: "center", display: "inline" }}
-  src="/code_snippet_without_mdx.png"
-/>
-<img
-  style={{ maxWidth: "50%", textAlign: "center", display: "inline" }}
-  src="/code_snippet_with_mdx.png"
-/>
+`<CountDown minutes="1" seconds="30" />`
 
-<SpeakerNotes>
-  I switched from gatsby-remark-prismjs to prism-react-renderer in order to have
-  access to more robust functionality that is available with React/MDX. I found
-  that prismsjs extendability was limited with gatsby-remark-prismjs and adding
-  additional plugins to support the existing prismsjs plugins like the ability
-  to copy to clipboard was under development.
-</SpeakerNotes>
-
----
-
-# Code.jsx
-
-```jsx
-import Highlight from "prism-react-renderer";
-import theme from "prism-react-renderer/themes/palenight";
-
-const Code = ({ codeString, language, metastring, ...props }) => {
-  return (
-    <Highlight code={codeString} language={language} theme={theme} {...props}>
-      {({ className, style, tokens, getLineProps, getTokenProps }) =>
-        // map through each token and render the line of code
-      }
-    </Highlight>
-  );
-};
-```
-
-<SpeakerNotes>
-  I created a new Code component for prism-react-renderer to go through each
-  line of code snippets
-</SpeakerNotes>
-
----
-
-# ArticleTemplate.jsx >> Using the Code component
-
-```jsx
-import TableOfContents from "../components/TableOfContents";
-import Callout from "../components/Callout";
-import { preToCodeBlock } from "mdx-utils";
-import Code from "./code";
-
-const components = {
-  TableOfContents,
-  Callout,
-  pre: (preProps) => {
-    const props = preToCodeBlock(preProps);
-    if (props) {
-      return <Code {...props} />;
-    } else {
-      return <pre {...preProps} />;
-    }
-  },
-};
-```
-
-<SpeakerNotes>
-  In the components that are passed into the MDXProvider. preToCodeBlock allows
-  us to replace `<pre />` with out custom component and also retains any props
-  that were passed in the MDX. Sources: https://mdxjs.com/blog/custom-pragma,
-  https://www.christopherbiscardi.com/post/codeblocks-mdx-and-mdx-utils{" "}
-</SpeakerNotes>
-
----
-
-# Updating Syntax for prism-react-renderer
-
-- syntax for code snippets varied a bit between the two plugins
-- I manually searched through my code examples to make sure the syntax was updated to render properly with the updated plugin
-- i.e., if there were highlighted lines the right lines were still being highlighted
+## <CountDown minutes="1" seconds="30" />
 
 ---
 
 # Summary
 
-- Swapping from gatsby-transformer-remark for gatsby-plugin-mdx is pretty straightforward but beware of potential plugin conflicts!
+- MDX provides a better developer experience tocustomize content written in Markdown (i.e, adding new types of Callouts, more flexible code snippets)
 
-- With MDX it's easier to customize posts (i.e, adding new types of Callouts, more flexible code snippets)
-
-- Migrating to MDX has improved my developer experience
-
-## <img style={{ maxWidth: "80%", textAlign: "center" }} src="/toc-diff.png" />
+<img style={{ maxWidth: "80%", textAlign: "center" }} src="/toc-diff.png" />
 
 ---
 
 # Resources
 
+- https://storybook.js.org/docs/react/writing-docs/mdx
+
 - https://nickymeuleman.netlify.app/blog/table-of-contents#nested-heading-levels
 - https://prince.dev/callout
-- https://www.christopherbiscardi.com/post/codeblocks-mdx-and-mdx-utils
 
-* https://github.com/PaulieScanlon/gatsby-mdx-embed
-* https://github.com/frontarm/mdx-util
+* https://www.mdx-embed.com/
 * https://github.com/FormidableLabs/prism-react-renderer
 
 - https://github.com/whoisryosuke/next-mdx-deck
@@ -511,11 +414,6 @@ const components = {
 
 # Thank you 👋🏾!
 
-I need to go explore the following in MDX...
-
-- creating examples that include React code that can be edited live 👀
-  with Formidable's `react-live`
-- Creating a dynamic countdown component
-- Adding more razzle dazzle ✨
+www.aboutmonica.com &bull; <a href="https://twitter.com/waterproofheart">@waterproofheart</a>
 
 </SlidePage>
