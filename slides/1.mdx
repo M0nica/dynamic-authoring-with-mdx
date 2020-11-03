@@ -28,9 +28,34 @@ I'm a software engineer who is passionate about making contributing to open-sour
 
 ---
 
-## MDX is "JSX in Markdown for ambitious projects"
+# But, what is MDX?
 
-<img style={{ maxWidth: "80%", textAlign: "center" }} src="/mdx-jsmdx.png" />
+<Callout variant="plain">
+  MDX can refer to either the syntax <em>or</em> library
+</Callout>
+
+<Callout variant="plain">
+  The MDX <em>library</em> converts MDX <em>syntax</em> ➡ JSX
+</Callout>
+
+<Callout variant="plain">JSX is compiled by Babel/Webpack for browser</Callout>
+
+<SpeakerNotes>
+  You can refer to MDX as the library that converts MDX syntax to JSX or as the
+  syntax that is written. MDX is converted into JSX which is ultimately compiled
+  for browser by tools like Babel or Webpack.
+</SpeakerNotes>
+
+---
+
+# MDX in Action: live code editor
+
+<LiveCode
+  title=""
+  size="large"
+  code='
+  <h1>"JSX in Markdown for ambitious projects" ✨</h1>'
+/>
 
 <SpeakerNotes>
 
@@ -38,20 +63,23 @@ First, you may be wonder what is MDX? At the simplest level it's a programming s
 
 MDX brands itself as "JSX in Markdown for ambitious projects".
 
+These slides are written in MDX and using mdx-deck-live-code to show how you can use React components within Markdown (MDX) files to add rich interactivity.
+
 </SpeakerNotes>
 
 ---
 
-# But, what is MDX?
+# MDX in Action: Third-Party Embeds
 
-- MDX can refer to either the syntax _or_ library
-- The MDX _library_ converts MDX _syntax_ ➡ JSX
-- JSX is compiled by Babel/Webpack for browser
+`<CodePen codePenId="jObpJma" tabs={["css", "result"]} />`
+
+<CodePen codePenId="jObpJma" tabs={["css", "result"]} />
+
+_Above embed powered by `mdx-embed`_.
 
 <SpeakerNotes>
-  You can refer to MDX as the library that converts MDX syntax to JSX or as the
-  syntax that is written. MDX is converted into JSX which is ultimately compiled
-  for browser by tools like Babel or Webpack.
+  For example here within an article written in Markdown I used an embed plugin
+  to display a Codepen pen
 </SpeakerNotes>
 
 ---
@@ -67,7 +95,7 @@ MDX brands itself as "JSX in Markdown for ambitious projects".
 
 <Callout variant="plain">
 
-create more engaging, interactive content with the ease of markdown
+create more engaging, interactive content with the ease of componentized markdown
 
 </Callout>
 
@@ -80,38 +108,29 @@ create more engaging, interactive content with the ease of markdown
 
 ---
 
-# MDX Example: <ArticleList/> in Article
+# Getting Started with MDX
 
-- site programmatically passes data into `<Articlelist/>` from the result of a GraphQL query
-- article uses hard-coded data (R) within a `.mdx` file to render the below instance of the `<ArticleList/>` component (L):
+`.md` ➡️ `.mdx`
 
-<a href="https://www.aboutmonica.com/blog/how-to-render-relevant-icons-based-on-content">
-  <img
-    style={{ maxWidth: "80%", textAlign: "center" }}
-    src="/mdx-in-blog-example.png"
-  />
-</a>
-
----
-
-# MDX Example: Third-Party Embeds
-
-`<CodePen codePenId="jObpJma" tabs={["css", "result"]} />`
-
-<CodePen codePenId="jObpJma" tabs={["css", "result"]} />
-
-_Above embed powered by `mdx-embed`_.
+```js
+const mdx = require("@mdx-js/mdx");
+const { MDXProvider, mdx: createElement } = require("@mdx-js/react");
+```
 
 <SpeakerNotes>
-  For example here within an article written in Markdown I used an embed plugin
-  to display a Codepen pen
+  Update Markdown extensions to have the mdx extension. There are specific
+  instructions on the MDX Doc site to set up with different bundlers and
+  frameworks including webpack, parcel, next, create-react-app, gatsby and more.
+  At a bare minimum you will need to use @mdx-js/react package and the
+  @mdx-js/mdx package.
 </SpeakerNotes>
 
 ---
 
-# Using MDXProvider
+# Importing Custom Components
 
-- centralized place to pass components that wraps layout pages
+- centralized place to make components globally accessible
+- wraps layout pages
 
 ```js
 import React from "react";
@@ -258,129 +277,23 @@ export const pageQuery = graphql`
 
 ---
 
-# Callout Banners
+# MDX Example: <ArticleList/> in Article
 
-<Callout>Here's some important information for you to know!</Callout>
-<Callout variant="danger">Oops, there was an error</Callout>
-<Callout variant="garden">
-  That's all for now! 🥕 I am continuing to update this post, so check back
-  later!
-</Callout>
-<Callout variant="book">
-  "Here's a great quote from something I read recently.
-</Callout>
+- can import ArticleList directly into `.mdx` file (outside of MDXProvider)
 
-Inspired by http://prince.dev/ 💜
+- site programmatically passes data into `<Articlelist/>` from the result of a GraphQL query
+- article uses hard-coded data (R) within a `.mdx` file to render the below instance of the `<ArticleList/>` component (L):
 
-<SpeakerNotes>
-  Something cool I saw around the web was folks using Callout banners to make
-  certain content stand out. I had a similar style already for a markdown quote
-  on my blog and was eager to extend the different styles of callouts I could
-  include in content so I created a Callout component.
-</SpeakerNotes>
+<a href="https://www.aboutmonica.com/blog/how-to-render-relevant-icons-based-on-content">
+  <img
+    style={{ maxWidth: "80%", textAlign: "center" }}
+    src="/mdx-in-blog-example.png"
+  />
+</a>
 
 ---
 
-# Markdown Quote -> Callout.jsx
-
-```
-> Markdown quote
-```
-
-to
-
-```jsx
-<>
-  <Callout>...</Callout>
-  <Callout variant="danger">...</Callout>
-  <Callout variant="garden">...</Callout>
-  <Callout variant="book">...</Callout>
-</>
-```
-
-<SpeakerNotes>
-  So now in addition to being able to add quotes within blog posts, I can also
-  add different variations of the banner by using the Callout component.
-</SpeakerNotes>
-
----
-
-# Callout Banners
-
-<Callout>Here's some important information for you to know!</Callout>
-<Callout variant="danger">Oops, there was an error</Callout>
-<Callout variant="garden">
-  That's all for now! 🥕 I am continuing to update this post, so check back
-  later!
-</Callout>
-<Callout variant="book">
-  "Here's a great quote from something I read recently.
-</Callout>
-
-<SpeakerNotes> Show the visual callouts again </SpeakerNotes>
-
----
-
-# Callout.jsx Variants
-
-```jsx
-const variantStyles = {
-  info: {
-    borderLeft: "4px solid #b4aaff",
-    backgroundColor: "rgba(224, 226, 255, 0.5)",
-    color: "#2a2135",
-  },
-  danger: {
-    borderLeft: "4px solid #ff7828",
-    backgroundColor: "rgb(253, 236, 234)",
-  },
-  garden: {
-    borderLeft: "4px solid #72bc23",
-    backgroundColor: "rgb(249, 253, 234)",
-  },
-  book: {
-    borderLeft: "4px solid #44a9ba",
-    backgroundColor: "rgb(234, 248, 253);",
-  },
-};
-```
-
-<SpeakerNotes>
-  For each variation there are different styles for borderLeft and
-  backgroundColor that are based off of the variant that is passed in. In the
-  component it also adds CSS classnames based on the variant prop.
-</SpeakerNotes>
-
----
-
-# Callout.jsx
-
-```jsx
-/* CSS file for pseudoclasses a.k.a emojis */
-import styles from "./callout.module.scss"
-export default function Callout({ variant = "info", children }) {
-  const classes = `${styles.infoBox} ${styles[variant]}`;
-  const variantStyles = {
-    ...
-  };
-  return (
-    <aside css={{ /* a bunch of default CSS*/ ...variantStyles[variant],
-      }} className={classes} >
-      {children}
-    </aside>
-  );
-}
-```
-
-<SpeakerNotes>
-  The Callout component also has a CSS Module file for the psuedoclasses to show
-  the emojis before each callout based on the CSS classname that was appended
-  from the variant prop.
-</SpeakerNotes>
-
----
-
-# Example: Timer
+# Walkthrough: Timer
 
 Add a timer or a countdown into a markdown file with the following:
 
@@ -392,7 +305,8 @@ Add a timer or a countdown into a markdown file with the following:
 
 # Summary
 
-- MDX provides a better developer experience tocustomize content written in Markdown (i.e, adding new types of Callouts, more flexible code snippets)
+- MDX provides a better developer experience to anhance content written in Markdown
+- The sky is the limit ☁️ in terms of how MDX can be used to enhance content
 
 <img style={{ maxWidth: "80%", textAlign: "center" }} src="/toc-diff.png" />
 

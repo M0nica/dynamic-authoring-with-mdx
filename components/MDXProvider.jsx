@@ -8,6 +8,7 @@ import Cover from "./Cover";
 import SpeakerNotes from "./SpeakerNotes";
 import Callout from "./Callout";
 import { CountDown } from "./Countdown";
+import { LiveCode } from "mdx-deck-live-code";
 
 const mdComponents = {
   h1: (props) => <h1 {...props} />,
@@ -27,6 +28,7 @@ const mdComponents = {
   Callout,
   CountDown,
   Cover,
+  LiveCode,
   SlidePage,
   SpeakerNotes,
 };
