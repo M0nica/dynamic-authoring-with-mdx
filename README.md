@@ -1,8 +1,8 @@
-![Presentation Mode](./screenshots/next-mdx-deck-example.gif)
+# Dynamic Authoring with MDX 📝 (built with Next MDX Deck - MDX, React, and [Next.js](https://nextjs.org/))
 
-# Next MDX Deck
+Monica Powell • Apollo Day • November 2020
 
-Create presentation decks using MDX, React, and [Next.js](https://nextjs.org/).
+A presentation on how developers can use MDX to supercharge their technical writing 
 
 ## Features
 
@@ -16,10 +16,9 @@ Create presentation decks using MDX, React, and [Next.js](https://nextjs.org/).
 
 ## Getting Started
 
-1. Clone the project: `git clone https://github.com/whoisryosuke/next-mdx-deck`
-2. Install dependencies: `npm i` or `yarn`
-3. Run the dev server: `npm run dev` or `yarn dev`
-4. Edit the first slide in `/slides/1.mdx` and save to [**see changes**](http://localhost:3000/)!
+1. Install dependencies: `npm i` or `yarn`
+2. Run the dev server: `npm run dev` or `yarn dev`
+3. Edit the first slide in `/slides/1.mdx` and save to [**see changes**](http://localhost:3000/)!
 
 When you're done, run `npm run build && npm run export` or `yarn build && yarn export` will create a static app you can deploy anywhere (or use locally). See below for more details.
 
